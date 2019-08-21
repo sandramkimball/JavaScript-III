@@ -82,9 +82,11 @@ Humanoid.prototype.greet = function(){
   return `${this.name} offers a greeting in ${this.language}.`;
 }
 
-Villain.prototype.attack = function(victim){
-  if(victim.healthPoints - this.attack <= 0){
-    return victim.destroy();
+Humanoid.prototype.attack = function(victim){
+  if(victim.healthPoints - this.attackPoints <= 0){
+    return `${this.name} has destroyed ${victim.name}!`;
+  } else {
+    return `${victim.name} still lives!`;
   }
 }
 
@@ -140,17 +142,17 @@ Villain.prototype.attack = function(victim){
   });
 
 
-  const theMeg = new Villain({
+  const theMeg = new Humanoid({
+    healthPoints: 20,
+    name: 'The Meg',
+    team: 'Villains',
+    attackPoints: 12,
     dimensions: {
       length: 5,
       width: 6,
       height: 10
     },
-    healthPoints: 20,
-    name: 'The Meg',
-    team: 'villain',
-    attack: 12,
-  })
+  });
 
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
