@@ -39,8 +39,6 @@
   * Instances of CharacterStats should have all of the same properties as GameObject.
 */
 
-// Test you work by un-commenting these 3 objects and the list of console logs below:
-
 function Humanoid(attr){
   this.newCreatedAt = attr.createdAt,
   this.dimensions = attr.dimensions,
@@ -51,8 +49,25 @@ function Humanoid(attr){
   this.language = attr.language
 }
 
+function Villain(attr){
+  this.dimensions = attr.dimensions,
+  this.healthPoints = attr.healthPoints,
+  this.name = attr.name,
+  this.team = attr.team,
+  this.attack = attr.attack
+}
+
+/*function Hero(attr){
+  this.dimensions = attr.dimensions,
+  this.healthPoints = attr.healthPoints,
+  this.name = attr.name,
+  this.team = attr.team,
+  this.attack = attr.attack,
+  this.language = attr.language
+}*/
+
 Date.prototype.createdAt = function() {
-  return new Date;
+  return Date;
 }
 
 Humanoid.prototype.destroy = function(){
@@ -65,6 +80,12 @@ Humanoid.prototype.takeDamage = function(){
 
 Humanoid.prototype.greet = function(){
   return `${this.name} offers a greeting in ${this.language}.`;
+}
+
+Villain.prototype.attack = function(victim){
+  if(victim.healthPoints - this.attack <= 0){
+    return victim.destroy();
+  }
 }
 
 
@@ -119,6 +140,17 @@ Humanoid.prototype.greet = function(){
   });
 
 
+  const theMeg = new Villain({
+    dimensions: {
+      length: 5,
+      width: 6,
+      height: 10
+    },
+    healthPoints: 20,
+    name: 'The Meg',
+    team: 'villain',
+    attack: 12,
+  })
 
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
@@ -130,9 +162,7 @@ Humanoid.prototype.greet = function(){
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-
-
-
+  console.log(theMeg.attack(archer));
 
 
   // Stretch task: 

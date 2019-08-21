@@ -22,7 +22,6 @@ const english = 'Hi.';
 greet();
 
 
-
     // Principle 2
 
 let spanish = {
